@@ -12,32 +12,37 @@ import {AxiosError} from "axios";
 import bs58 from "bs58";
 
 const CreatePoolButton = () => {
-    const { imageBase64String, title, setPoolAccountKey } = useContext(PoolCreationContext);
+    const { imageBase64String, title, setPoolAccountKey, description, signature, setSignature } = useContext(PoolCreationContext);
 
     const wallet = useAnchorWallet();
     const walletContext = useWallet();
     const { connection } = useConnection();
 
     const createPool = async (e: MouseEvent) => {
+        e.preventDefault();
+        if (!imageBase64String || !title || !description) {
+            return window.alert('Missing fields!');
+        }
+        if (!walletContext.connected) {
+            return window.alert('Connect your wallet first!');
+        }
         if (wallet) {
-            e.preventDefault();
             const signatureBytes = (await signMessage(walletContext))?.signature || [];
-            const signature = bs58.encode(signatureBytes);
+            const newSignature = bs58.encode(signatureBytes);
+            setSignature(newSignature);
             const payload = {
                 image: imageBase64String,
                 title,
-                signature
+                signature: signature || newSignature,
             };
             let imageUrl = '';
             try {
                 imageUrl = (await uploadImage(payload)).data.imageUrl;
             } catch (e) {
-                console.log(e)
-                window.alert(
+                return window.alert(
                     ((e as AxiosError).response?.data as ({ message: string })).message ||
                     (e as Error).message
                 );
-                return;
             }
             const provider = new AnchorProvider(connection, wallet, {});
             const program = new Program(
@@ -47,7 +52,7 @@ const CreatePoolButton = () => {
             const poolAccountKey = await derivePoolAccountKey(program, title);
             setPoolAccountKey(poolAccountKey);
             const transaction = await program.methods
-                .createPool(title, getTitleHash(title))
+                .createPool(title, getTitleHash(title), imageUrl, description)
                 .accounts({
                     poolAccount: poolAccountKey,
                     admin: wallet.publicKey,
@@ -65,7 +70,7 @@ const CreatePoolButton = () => {
         <button type="submit" onClick={createPool}>
             Create Pool
         </button>
-    )
+    );
 };
 
 export default CreatePoolButton;

@@ -9,7 +9,16 @@
   "instructions": [
     {
       "name": "claim_win",
-      "discriminator": [163, 215, 101, 246, 25, 134, 110, 194],
+      "discriminator": [
+        163,
+        215,
+        101,
+        246,
+        25,
+        134,
+        110,
+        194
+      ],
       "accounts": [
         {
           "name": "pool_account",
@@ -33,7 +42,16 @@
     },
     {
       "name": "create_option",
-      "discriminator": [226, 92, 124, 94, 113, 96, 60, 172],
+      "discriminator": [
+        226,
+        92,
+        124,
+        94,
+        113,
+        96,
+        60,
+        172
+      ],
       "accounts": [
         {
           "name": "option_account",
@@ -70,14 +88,26 @@
         {
           "name": "option_hash",
           "type": {
-            "array": ["u8", 32]
+            "array": [
+              "u8",
+              32
+            ]
           }
         }
       ]
     },
     {
       "name": "create_pool",
-      "discriminator": [233, 146, 209, 142, 207, 104, 64, 188],
+      "discriminator": [
+        233,
+        146,
+        209,
+        142,
+        207,
+        104,
+        64,
+        188
+      ],
       "accounts": [
         {
           "name": "pool_account",
@@ -110,14 +140,34 @@
         {
           "name": "title_hash",
           "type": {
-            "array": ["u8", 32]
+            "array": [
+              "u8",
+              32
+            ]
           }
+        },
+        {
+          "name": "image_url",
+          "type": "string"
+        },
+        {
+          "name": "description",
+          "type": "string"
         }
       ]
     },
     {
       "name": "enter_pool",
-      "discriminator": [73, 134, 141, 203, 63, 251, 217, 169],
+      "discriminator": [
+        73,
+        134,
+        141,
+        203,
+        63,
+        251,
+        217,
+        169
+      ],
       "accounts": [
         {
           "name": "entry_account",
@@ -162,7 +212,16 @@
     },
     {
       "name": "set_is_paused",
-      "discriminator": [105, 103, 58, 197, 208, 86, 131, 112],
+      "discriminator": [
+        105,
+        103,
+        58,
+        197,
+        208,
+        86,
+        131,
+        112
+      ],
       "accounts": [
         {
           "name": "pool_account",
@@ -183,7 +242,16 @@
     },
     {
       "name": "set_winning_option",
-      "discriminator": [156, 73, 113, 33, 170, 115, 163, 206],
+      "discriminator": [
+        156,
+        73,
+        113,
+        33,
+        170,
+        115,
+        163,
+        206
+      ],
       "accounts": [
         {
           "name": "pool_account",
@@ -206,21 +274,83 @@
   "accounts": [
     {
       "name": "Entry",
-      "discriminator": [63, 18, 152, 113, 215, 246, 221, 250]
+      "discriminator": [
+        63,
+        18,
+        152,
+        113,
+        215,
+        246,
+        221,
+        250
+      ]
     },
     {
       "name": "Pool",
-      "discriminator": [241, 154, 109, 4, 17, 177, 109, 188]
+      "discriminator": [
+        241,
+        154,
+        109,
+        4,
+        17,
+        177,
+        109,
+        188
+      ]
     },
     {
       "name": "PoolOption",
-      "discriminator": [42, 22, 142, 109, 158, 112, 199, 199]
+      "discriminator": [
+        42,
+        22,
+        142,
+        109,
+        158,
+        112,
+        199,
+        199
+      ]
     }
   ],
   "events": [
     {
+      "name": "OptionCreated",
+      "discriminator": [
+        22,
+        155,
+        156,
+        185,
+        146,
+        155,
+        71,
+        83
+      ]
+    },
+    {
+      "name": "PoolCreated",
+      "discriminator": [
+        202,
+        44,
+        41,
+        88,
+        104,
+        220,
+        157,
+        82
+      ]
+    },
+    {
       "name": "PoolEntered",
-      "discriminator": [224, 196, 156, 64, 200, 219, 71, 199]
+      "discriminator": [
+        224,
+        196,
+        156,
+        64,
+        200,
+        219,
+        71,
+        199
+      ]
     }
   ],
   "errors": [
@@ -253,6 +383,16 @@
       "code": 6005,
       "name": "EntryNotDerivedFromOptionOrSigner",
       "msg": "This entry was not derived from the winning option or the signer"
+    },
+    {
+      "code": 6006,
+      "name": "ImageUrlTooLong",
+      "msg": "The image URL is too long. Maximum length is 100 characters."
+    },
+    {
+      "code": 6007,
+      "name": "DescriptionTooLong",
+      "msg": "The description is too long. Maximum length is 200 characters."
     }
   ],
   "types": [
@@ -268,6 +408,26 @@
           {
             "name": "is_claimed",
             "type": "bool"
+          }
+        ]
+      }
+    },
+    {
+      "name": "OptionCreated",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "pool_account",
+            "type": "pubkey"
+          },
+          {
+            "name": "option",
+            "type": "pubkey"
+          },
+          {
+            "name": "title",
+            "type": "string"
           }
         ]
       }
@@ -292,6 +452,30 @@
           {
             "name": "value",
             "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "PoolCreated",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "pool_account",
+            "type": "pubkey"
+          },
+          {
+            "name": "title",
+            "type": "string"
+          },
+          {
+            "name": "image_url",
+            "type": "string"
+          },
+          {
+            "name": "description",
+            "type": "string"
           }
         ]
       }

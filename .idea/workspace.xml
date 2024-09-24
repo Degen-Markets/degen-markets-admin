@@ -5,26 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2bcf7e30-540d-4300-8d4d-61b8189dace5" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/config-overrides.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/PoolCreation/CreatePoolButton.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/PoolCreation/DescriptionTextarea.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/PoolCreation/ImageUpload.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/PoolCreation/PoolCreationContext.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/PoolCreation/PoolCreationForm.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/PoolCreation/TitleInput.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/SolanaConnectButton.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/WalletProvider.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/api.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/solana/idl/degen_pools.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/solana/types/degen_pools.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/utils/cryptography.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/utils/pools.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PoolCreation/CreatePoolButton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/PoolCreation/CreatePoolButton.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/solana/idl/degen_pools.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/solana/idl/degen_pools.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/solana/types/degen_pools.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/solana/types/degen_pools.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,7 +39,7 @@
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "/Users/angadsingh/degen-markets-admin/src/utils",
+    "last_opened_file_path": "/Users/angadsingh/degen-markets-admin/src",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -67,8 +51,8 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/utils" />
       <recent name="$PROJECT_DIR$/src" />
+      <recent name="$PROJECT_DIR$/src/utils" />
       <recent name="$PROJECT_DIR$" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -96,7 +80,7 @@
       <workItem from="1726582014649" duration="915000" />
       <workItem from="1726583097122" duration="6860000" />
       <workItem from="1727103699230" duration="13000" />
-      <workItem from="1727103716980" duration="9430000" />
+      <workItem from="1727103716980" duration="12604000" />
     </task>
     <servers />
   </component>
