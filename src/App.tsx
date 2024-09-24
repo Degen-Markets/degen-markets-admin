@@ -1,14 +1,19 @@
 import React from 'react';
+import WalletContextProvider from "./WalletProvider";
+import SolanaConnectButton from "./SolanaConnectButton";
+import PoolCreationForm from "./PoolCreation/PoolCreationForm";
 
 function App() {
   return (
-    <div>
-      <header>
-        <p>
-          ADMIN WEBSITE
-        </p>
-      </header>
-    </div>
+      <WalletContextProvider>
+          <header style={{ display: 'flex', justifyContent: 'space-between' }}>
+              <div>
+                ADMIN WEBSITE
+              </div>
+              <SolanaConnectButton />
+          </header>
+          <PoolCreationForm />
+      </WalletContextProvider>
   );
 }
 
