@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useProgram } from "../Contexts/ProgramContext";
 import { useAnchorWallet, useWallet } from "@solana/wallet-adapter-react";
 import * as anchor from "@coral-xyz/anchor";
@@ -10,6 +10,7 @@ const OptionCreationForm = () => {
   const { program } = useProgram();
   const wallet = useAnchorWallet();
   const walletContext = useWallet();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -17,12 +18,15 @@ const OptionCreationForm = () => {
       return window.alert("Connect your wallet first!");
     }
 
+    setIsSubmitting(true);
+
     const formData = new FormData(e.currentTarget);
 
     const poolTitle = formData.get(formFields.poolTitle) as string;
     const optionTitle = formData.get(formFields.optionTitle) as string;
 
     if (!poolTitle || !optionTitle) {
+      setIsSubmitting(false);
       return window.alert("All fields are required!");
     }
 
@@ -55,34 +59,43 @@ const OptionCreationForm = () => {
       window.alert("Option created successfully!");
     } catch (error) {
       window.alert((error as Error).message);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor={formFields.poolTitle}>Pool Title:</label>
-        <input
-          type="text"
-          id={formFields.poolTitle}
-          name={formFields.poolTitle}
-          required
-          minLength={1}
-          maxLength={50}
-        />
-      </div>
-      <div>
-        <label htmlFor={formFields.optionTitle}>Option Title:</label>
-        <input
-          type="text"
-          id={formFields.optionTitle}
-          name={formFields.optionTitle}
-          required
-          minLength={1}
-          maxLength={50}
-        />
-      </div>
-      <button type="submit">Create Option</button>
+      <fieldset
+        disabled={isSubmitting}
+        style={{ border: "none", padding: 0, margin: 0 }}
+      >
+        <div>
+          <label htmlFor={formFields.poolTitle}>Pool Title:</label>
+          <input
+            type="text"
+            id={formFields.poolTitle}
+            name={formFields.poolTitle}
+            required
+            minLength={1}
+            maxLength={50}
+          />
+        </div>
+        <div>
+          <label htmlFor={formFields.optionTitle}>Option Title:</label>
+          <input
+            type="text"
+            id={formFields.optionTitle}
+            name={formFields.optionTitle}
+            required
+            minLength={1}
+            maxLength={50}
+          />
+        </div>
+        <button type="submit">
+          {isSubmitting ? "Creating Option..." : "Create Option"}
+        </button>
+      </fieldset>
     </form>
   );
 };

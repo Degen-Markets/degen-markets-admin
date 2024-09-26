@@ -1,14 +1,22 @@
+import React, { useContext } from "react";
 import ImageUpload from "./ImageUpload";
 import CreatePoolButton from "./CreatePoolButton";
-import React from "react";
-import { PoolCreationContextProvider } from "./PoolCreationContext";
+import {
+  PoolCreationContext,
+  PoolCreationContextProvider,
+} from "./PoolCreationContext";
 import TitleInput from "./TitleInput";
 import DescriptionTextarea from "./DescriptionTextarea";
 
 const PoolCreationForm = () => {
+  const { isSubmitting } = useContext(PoolCreationContext);
+
   return (
-    <PoolCreationContextProvider>
-      <form>
+    <form>
+      <fieldset
+        disabled={isSubmitting}
+        style={{ border: "none", padding: 0, margin: 0 }}
+      >
         <TitleInput />
         <br />
         <DescriptionTextarea />
@@ -16,9 +24,15 @@ const PoolCreationForm = () => {
         <ImageUpload />
         <br />
         <CreatePoolButton />
-      </form>
-    </PoolCreationContextProvider>
+      </fieldset>
+    </form>
   );
 };
 
-export default PoolCreationForm;
+const WrappedPoolCreationForm = () => (
+  <PoolCreationContextProvider>
+    <PoolCreationForm />
+  </PoolCreationContextProvider>
+);
+
+export default WrappedPoolCreationForm;

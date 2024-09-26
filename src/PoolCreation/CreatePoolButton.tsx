@@ -17,6 +17,8 @@ const CreatePoolButton = () => {
     description,
     signature,
     setSignature,
+    isSubmitting,
+    setIsSubmitting,
   } = useContext(PoolCreationContext);
 
   const wallet = useAnchorWallet();
@@ -25,6 +27,8 @@ const CreatePoolButton = () => {
 
   const createPool = async (e: MouseEvent) => {
     e.preventDefault();
+    if (isSubmitting) return;
+
     if (!imageBase64String || !title || !description) {
       return window.alert("Missing fields!");
     }
@@ -32,55 +36,61 @@ const CreatePoolButton = () => {
       return window.alert("Connect your wallet first!");
     }
 
-    if (wallet) {
-      const signatureBytes =
-        (await signMessage(walletContext))?.signature || [];
-      const newSignature = bs58.encode(signatureBytes);
-      setSignature(newSignature);
-      const payload = {
-        image: imageBase64String,
-        title,
-        signature: signature || newSignature,
-      };
-      let imageUrl = "";
-      try {
-        imageUrl = (await uploadImage(payload)).data.imageUrl;
-      } catch (e) {
-        return window.alert(
-          ((e as AxiosError).response?.data as { message: string }).message ||
-            (e as Error).message,
-        );
-      }
-      const poolAccountKey = await derivePoolAccountKey(program, title);
-      setPoolAccountKey(poolAccountKey);
-      const titleHash = getPoolTitleHash(title);
-      const transaction = await program.methods
-        .createPool(
+    setIsSubmitting(true);
+
+    try {
+      if (wallet) {
+        const signatureBytes =
+          (await signMessage(walletContext))?.signature || [];
+        const newSignature = bs58.encode(signatureBytes);
+        setSignature(newSignature);
+        const payload = {
+          image: imageBase64String,
           title,
-          getBytesFromHex(titleHash) as unknown as number[],
-          imageUrl,
-          description,
-        )
-        .accountsStrict({
-          poolAccount: poolAccountKey,
-          admin: wallet.publicKey,
-          systemProgram: anchor.web3.SystemProgram.programId,
-        })
-        .transaction();
-      try {
+          signature: signature || newSignature,
+        };
+        let imageUrl = "";
+        try {
+          imageUrl = (await uploadImage(payload)).data.imageUrl;
+        } catch (e) {
+          throw new Error(
+            ((e as AxiosError).response?.data as { message: string }).message ||
+              (e as Error).message,
+          );
+        }
+        const poolAccountKey = await derivePoolAccountKey(program, title);
+        setPoolAccountKey(poolAccountKey);
+        const titleHash = getPoolTitleHash(title);
+        const transaction = await program.methods
+          .createPool(
+            title,
+            getBytesFromHex(titleHash) as unknown as number[],
+            imageUrl,
+            description,
+          )
+          .accountsStrict({
+            poolAccount: poolAccountKey,
+            admin: wallet.publicKey,
+            systemProgram: anchor.web3.SystemProgram.programId,
+          })
+          .transaction();
+
         await walletContext.sendTransaction(
           transaction,
           program.provider.connection,
         );
-      } catch (e) {
-        window.alert((e as Error).message);
+        window.alert("Pool created successfully!");
       }
+    } catch (e) {
+      window.alert((e as Error).message);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
   return (
-    <button type="submit" onClick={createPool}>
-      Create Pool
+    <button type="submit" onClick={createPool} disabled={isSubmitting}>
+      {isSubmitting ? "Creating Pool..." : "Create Pool"}
     </button>
   );
 };
