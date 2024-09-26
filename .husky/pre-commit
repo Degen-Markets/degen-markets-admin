@@ -1,1 +1,1 @@
-echo "Running pre-commit hook"
+npx lint-staged
