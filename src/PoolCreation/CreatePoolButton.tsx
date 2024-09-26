@@ -2,8 +2,8 @@ import { MouseEvent, useContext } from "react";
 import { PoolCreationContext } from "./PoolCreationContext";
 import { uploadImage } from "../api";
 import { useAnchorWallet, useWallet } from "@solana/wallet-adapter-react";
-import { derivePoolAccountKey } from "../utils/pools";
-import { getTitleHash, signMessage } from "../utils/cryptography";
+import { derivePoolAccountKey, getPoolTitleHash } from "../utils/pools";
+import { getBytesFromHex, signMessage } from "../utils/cryptography";
 import * as anchor from "@coral-xyz/anchor";
 import { AxiosError } from "axios";
 import bs58 from "bs58";
@@ -53,8 +53,14 @@ const CreatePoolButton = () => {
       }
       const poolAccountKey = await derivePoolAccountKey(program, title);
       setPoolAccountKey(poolAccountKey);
+      const titleHash = getPoolTitleHash(title);
       const transaction = await program.methods
-        .createPool(title, getTitleHash(title), imageUrl, description)
+        .createPool(
+          title,
+          getBytesFromHex(titleHash) as unknown as number[],
+          imageUrl,
+          description,
+        )
         .accounts({
           poolAccount: poolAccountKey,
           admin: wallet.publicKey,
