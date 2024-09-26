@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import WalletContextProvider from "./Contexts/WalletProvider";
 import SolanaConnectButton from "./SolanaConnectButton";
 import PoolCreationForm from "./PoolCreation/PoolCreationForm";
+import OptionCreationForm from "./OptionCreation/OptionCreationForm";
 import { ProgramProvider } from "./Contexts/ProgramContext";
 
 enum FormType {
   PoolCreation = "poolCreation",
+  OptionCreation = "optionCreation",
 }
 
 function App() {
@@ -17,8 +19,10 @@ function App() {
     switch (selectedForm) {
       case FormType.PoolCreation:
         return <PoolCreationForm />;
+      case FormType.OptionCreation:
+        return <OptionCreationForm />;
       default:
-        return null;
+        throw new Error("Invalid form type");
     }
   };
 
@@ -40,6 +44,15 @@ function App() {
                 onChange={(e) => setSelectedForm(e.target.value as FormType)}
               />
               Pool Creation
+            </label>
+            <label>
+              <input
+                type="radio"
+                value={FormType.OptionCreation}
+                checked={selectedForm === FormType.OptionCreation}
+                onChange={(e) => setSelectedForm(e.target.value as FormType)}
+              />
+              Option Creation
             </label>
           </fieldset>
         </div>

@@ -61,7 +61,7 @@ const CreatePoolButton = () => {
           imageUrl,
           description,
         )
-        .accounts({
+        .accountsStrict({
           poolAccount: poolAccountKey,
           admin: wallet.publicKey,
           systemProgram: anchor.web3.SystemProgram.programId,
