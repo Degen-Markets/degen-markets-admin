@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import WalletContextProvider from "./WalletProvider";
+import WalletContextProvider from "./Contexts/WalletProvider";
 import SolanaConnectButton from "./SolanaConnectButton";
 import PoolCreationForm from "./PoolCreation/PoolCreationForm";
 import { ProgramProvider } from "./Contexts/ProgramContext";
