@@ -1,19 +1,13 @@
 import { MouseEvent, useContext } from "react";
 import { PoolCreationContext } from "./PoolCreationContext";
 import { uploadImage } from "../api";
-import {
-  useConnection,
-  useAnchorWallet,
-  useWallet,
-} from "@solana/wallet-adapter-react";
-import { AnchorProvider, Idl, Program } from "@coral-xyz/anchor";
-import idl from "../solana/idl/degen_pools.json";
-import { DegenPools } from "../solana/types/degen_pools";
+import { useAnchorWallet, useWallet } from "@solana/wallet-adapter-react";
 import { derivePoolAccountKey } from "../utils/pools";
 import { getTitleHash, signMessage } from "../utils/cryptography";
 import * as anchor from "@coral-xyz/anchor";
 import { AxiosError } from "axios";
 import bs58 from "bs58";
+import { useProgram } from "../Contexts/ProgramContext";
 
 const CreatePoolButton = () => {
   const {
@@ -27,16 +21,17 @@ const CreatePoolButton = () => {
 
   const wallet = useAnchorWallet();
   const walletContext = useWallet();
-  const { connection } = useConnection();
+  const { program } = useProgram();
 
   const createPool = async (e: MouseEvent) => {
     e.preventDefault();
     if (!imageBase64String || !title || !description) {
       return window.alert("Missing fields!");
     }
-    if (!walletContext.connected) {
+    if (!walletContext.connected || !program) {
       return window.alert("Connect your wallet first!");
     }
+
     if (wallet) {
       const signatureBytes =
         (await signMessage(walletContext))?.signature || [];
@@ -56,11 +51,6 @@ const CreatePoolButton = () => {
             (e as Error).message,
         );
       }
-      const provider = new AnchorProvider(connection, wallet, {});
-      const program = new Program(
-        idl as unknown as Idl,
-        provider,
-      ) as unknown as Program<DegenPools>;
       const poolAccountKey = await derivePoolAccountKey(program, title);
       setPoolAccountKey(poolAccountKey);
       const transaction = await program.methods
@@ -72,7 +62,10 @@ const CreatePoolButton = () => {
         })
         .transaction();
       try {
-        await walletContext.sendTransaction(transaction, connection);
+        await walletContext.sendTransaction(
+          transaction,
+          program.provider.connection,
+        );
       } catch (e) {
         window.alert((e as Error).message);
       }
