@@ -44,13 +44,9 @@ export const ProgramProvider: React.FC<React.PropsWithChildren> = ({
 
 const getProgram = (
   connection: Connection,
-  wallet: AnchorWallet
+  wallet: AnchorWallet,
 ): Program<DegenPools> => {
   const provider = new AnchorProvider(connection, wallet, {});
-  const program = new Program(
-    idl as unknown as DegenPools,
-    // idl.address,
-    provider
-  );
+  const program = new Program(idl as unknown as DegenPools, provider);
   return program;
 };
