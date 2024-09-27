@@ -40,8 +40,10 @@ const CreatePoolButton = () => {
 
     try {
       if (wallet) {
-        const signatureBytes =
-          (await signMessage(walletContext))?.signature || [];
+        const signatureBytes = (await signMessage(walletContext))?.signature;
+        if (!signatureBytes) {
+          throw new Error("Failed to sign message");
+        }
         const newSignature = bs58.encode(signatureBytes);
         setSignature(newSignature);
         const payload = {
