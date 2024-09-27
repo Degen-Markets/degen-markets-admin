@@ -1,21 +1,15 @@
 import { WalletContextState } from "@solana/wallet-adapter-react";
-import * as anchor from "@coral-xyz/anchor";
 // @ts-ignore-next-line
 import createHash from "create-hash";
 
-export const getBytesFromHashedStr = (str: string) => {
+export const getHashStr = (str: string): string => {
   const hashedStr = createHash("sha256").update(str, "utf-8");
-  const buffer = hashedStr.digest();
-  return Uint8Array.from(buffer);
+  return hashedStr.digest("hex");
 };
 
-export const getTitleHash = (title: string) =>
-  getBytesFromHashedStr(title) as unknown as number[];
-
-export const getOptionTitleHash = (
-  poolAccountKey: anchor.web3.PublicKey,
-  title: string,
-) => getBytesFromHashedStr(poolAccountKey + title);
+export const getBytesFromHex = (hexStr: string): Uint8Array => {
+  return Uint8Array.from(Buffer.from(hexStr, "hex"));
+};
 
 export async function signMessage(
   wallet: WalletContextState,

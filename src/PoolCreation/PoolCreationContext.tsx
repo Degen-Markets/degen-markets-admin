@@ -12,6 +12,8 @@ type PoolCreation = {
   setPoolAccountKey: (poolAccountKey: PublicKey) => void;
   description: string;
   setDescription: (description: string) => void;
+  isSubmitting: boolean;
+  setIsSubmitting: (isSubmitting: boolean) => void;
 };
 
 export const PoolCreationContext = createContext<PoolCreation>(
@@ -26,6 +28,7 @@ export const PoolCreationContextProvider = (props: PropsWithChildren) => {
     PublicKey.default,
   );
   const [description, setDescription] = useState<string>("");
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
   return (
     <PoolCreationContext.Provider
@@ -40,6 +43,8 @@ export const PoolCreationContextProvider = (props: PropsWithChildren) => {
         setPoolAccountKey,
         description,
         setDescription,
+        isSubmitting,
+        setIsSubmitting,
       }}
     >
       {props.children}

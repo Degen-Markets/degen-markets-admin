@@ -13,3 +13,21 @@ export const uploadImage = (uploadImagePayload: UploadImagePayload) =>
     `${baseUrl}/upload-image`,
     uploadImagePayload,
   );
+
+type PoolResponse = {
+  address: string;
+  title: string;
+  description: string;
+  image: `https://${string}`;
+  isPaused: boolean;
+}[];
+export const fetchPools = async (): Promise<PoolResponse> => {
+  try {
+    const res = await axios.get<PoolResponse>(`${baseUrl}/pools`);
+    return res.data;
+  } catch (error) {
+    console.error(error);
+    window.alert("Could not fetch pools");
+    throw new Error("Could not fetch pools"); // stop further execution
+  }
+};
