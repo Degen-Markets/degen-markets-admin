@@ -1,13 +1,9 @@
-import React, { createContext, useContext, useMemo } from "react";
-import {
-  useConnection,
-  useAnchorWallet,
-  AnchorWallet,
-} from "@solana/wallet-adapter-react";
-import { AnchorProvider, Program, Idl } from "@coral-xyz/anchor";
+import React, {createContext, useContext, useMemo} from "react";
+import {AnchorWallet, useAnchorWallet, useConnection,} from "@solana/wallet-adapter-react";
+import {AnchorProvider, Program} from "@coral-xyz/anchor";
 import idl from "../solana/idl/degen_pools.json";
-import { DegenPools } from "../solana/types/degen_pools";
-import { Connection } from "@solana/web3.js";
+import {DegenPools} from "../solana/types/degen_pools";
+import {Connection} from "@solana/web3.js";
 
 type ValidContext = { program: Program<DegenPools> | null };
 
