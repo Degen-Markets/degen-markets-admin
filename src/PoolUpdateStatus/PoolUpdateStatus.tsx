@@ -12,7 +12,7 @@ const PoolUpdateStatus = () => {
   const wallet = useAnchorWallet();
   const walletContext = useWallet();
 
-  const setIsPoolPaused = async (isPaused: boolean) => {
+  const pausePool = async (isPaused: boolean) => {
     if (!wallet) return window.alert("Please connect to your wallet");
     if (!selectedPoolAddress) {
       return window.alert("Please select a pool.");
@@ -58,8 +58,8 @@ const PoolUpdateStatus = () => {
       </div>
       <div style={{ marginTop: "10px" }}>
         <button
-          onClick={() => setIsPoolPaused(true)}
-          disabled={isProcessing}
+          onClick={() => pausePool(true)}
+          disabled={!selectedPoolAddress || isProcessing}
           style={{ marginRight: "10px" }}
         >
           {isProcessing

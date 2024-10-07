@@ -90,7 +90,7 @@ const OptionCreationForm = () => {
             name={formFields.optionTitle}
             required
             minLength={1}
-            maxLength={30}
+            maxLength={50}
           />
         </div>
         <button type="submit">
