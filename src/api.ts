@@ -14,16 +14,19 @@ export const uploadImage = (uploadImagePayload: UploadImagePayload) =>
     uploadImagePayload,
   );
 
-type PoolResponse = {
+export type Pool = {
   address: string;
   title: string;
   description: string;
   image: `https://${string}`;
   isPaused: boolean;
-}[];
-export const fetchPools = async (): Promise<PoolResponse> => {
+};
+
+type PoolsResponse = Pool[];
+
+export const fetchPools = async (): Promise<PoolsResponse> => {
   try {
-    const res = await axios.get<PoolResponse>(`${baseUrl}/pools`);
+    const res = await axios.get<PoolsResponse>(`${baseUrl}/pools`);
     return res.data;
   } catch (error) {
     console.error(error);
@@ -32,7 +35,7 @@ export const fetchPools = async (): Promise<PoolResponse> => {
   }
 };
 
-type OptionResponse = {
+type OptionsResponse = {
   address: string;
   pool: string;
   title: string;
@@ -42,9 +45,9 @@ type OptionResponse = {
 
 export const fetchOptions = async (
   poolAddress: string,
-): Promise<OptionResponse> => {
+): Promise<OptionsResponse> => {
   try {
-    const res = await axios.get<OptionResponse>(
+    const res = await axios.get<OptionsResponse>(
       `${baseUrl}/options?pool=${poolAddress}`,
     );
     return res.data;

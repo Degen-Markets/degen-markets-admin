@@ -4,6 +4,7 @@ import { useAnchorWallet, useWallet } from "@solana/wallet-adapter-react";
 import * as anchor from "@coral-xyz/anchor";
 import PoolSelect from "../Components/PoolSelect";
 import OptionSelect from "../Components/OptionSelect";
+import { Pool } from "../api";
 
 const SetWinningOptionForm = () => {
   const { program } = useProgram();
@@ -57,6 +58,7 @@ const SetWinningOptionForm = () => {
             selectedPoolAddress={selectedPoolAddress}
             onChange={setSelectedPoolAddress}
             disabled={isSubmitting}
+            filter={filterPausedPools}
           />
         </div>
         <div>
@@ -75,5 +77,7 @@ const SetWinningOptionForm = () => {
     </form>
   );
 };
+
+const filterPausedPools = (pool: Pool) => pool.isPaused;
 
 export default SetWinningOptionForm;
