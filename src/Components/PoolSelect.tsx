@@ -1,0 +1,57 @@
+import React, { useState, useEffect } from "react";
+import { fetchPools } from "../api";
+
+interface PoolSelectProps {
+  selectedPoolAddress: string;
+  onChange: (poolAddress: string) => void;
+  disabled?: boolean;
+}
+
+const PoolSelect: React.FC<PoolSelectProps> = ({
+  selectedPoolAddress,
+  onChange,
+  disabled = false,
+}) => {
+  const [pools, setPools] = useState<{ address: string; title: string }[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const loadPools = async () => {
+    setIsLoading(true);
+    try {
+      const allPools = await fetchPools();
+      const activePools = allPools.filter((pool) => !pool.isPaused);
+      setPools(activePools.map(({ address, title }) => ({ address, title })));
+    } catch (error) {
+      console.error("Failed to load pools:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    loadPools();
+  }, []);
+
+  return (
+    <select
+      value={selectedPoolAddress}
+      onChange={(e) => onChange(e.target.value)}
+      disabled={disabled || isLoading}
+    >
+      {isLoading ? (
+        <option value="">Fetching Pools...</option>
+      ) : (
+        <>
+          <option value="">Select a pool</option>
+          {pools.map((pool) => (
+            <option key={pool.address} value={pool.address}>
+              {pool.title}
+            </option>
+          ))}
+        </>
+      )}
+    </select>
+  );
+};
+
+export default PoolSelect;

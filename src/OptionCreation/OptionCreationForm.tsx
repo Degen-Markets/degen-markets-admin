@@ -5,13 +5,14 @@ import * as anchor from "@coral-xyz/anchor";
 import { deriveOptionAccountKey, getOptionHash } from "../utils/options";
 import { getBytesFromHex } from "../utils/cryptography";
 import { fetchPools } from "../api";
+import PoolSelect from "../Components/PoolSelect";
 
 const OptionCreationForm = () => {
   const { program } = useProgram();
   const wallet = useAnchorWallet();
   const walletContext = useWallet();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const { data: activePools, isLoading } = useActivePools();
+  const [selectedPoolAddress, setSelectedPoolAddress] = useState("");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -22,7 +23,6 @@ const OptionCreationForm = () => {
     const formData = new FormData(e.currentTarget);
 
     const optionTitle = formData.get(formFields.optionTitle) as string;
-    const selectedPoolAddress = formData.get(formFields.poolTitle) as string;
 
     if (!selectedPoolAddress || !optionTitle) {
       setIsSubmitting(false);
@@ -71,23 +71,16 @@ const OptionCreationForm = () => {
   return (
     <form onSubmit={tryHandleSubmit}>
       <fieldset
-        disabled={isSubmitting || isLoading}
+        disabled={isSubmitting}
         style={{ border: "none", padding: 0, margin: 0 }}
       >
         <div>
-          <label htmlFor={formFields.poolTitle}>Select Pool:</label>
-          <select
-            id={formFields.poolTitle}
-            name={formFields.poolTitle}
-            required
-          >
-            <option value="">Select a pool</option>
-            {activePools.map((pool) => (
-              <option key={pool.address} value={pool.address}>
-                {pool.title}
-              </option>
-            ))}
-          </select>
+          <label htmlFor="poolTitle">Select Pool:</label>
+          <PoolSelect
+            selectedPoolAddress={selectedPoolAddress}
+            onChange={setSelectedPoolAddress}
+            disabled={isSubmitting}
+          />
         </div>
         <div>
           <label htmlFor={formFields.optionTitle}>Option Title:</label>
@@ -111,30 +104,6 @@ const OptionCreationForm = () => {
 const formFields = {
   poolTitle: "poolTitle",
   optionTitle: "optionTitle",
-};
-
-const useActivePools = () => {
-  const [data, setData] = useState<{ address: string; title: string }[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-
-  const loadPools = async () => {
-    setIsLoading(true);
-    try {
-      const allPools = await fetchPools();
-      const activePools = allPools.filter((pool) => !pool.isPaused);
-      setData(activePools.map(({ address, title }) => ({ address, title })));
-    } catch (error) {
-      console.error("Failed to load pools:", error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    loadPools();
-  }, []);
-
-  return { data, isLoading };
 };
 
 export default OptionCreationForm;

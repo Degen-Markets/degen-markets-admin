@@ -4,10 +4,12 @@ import SolanaConnectButton from "./SolanaConnectButton";
 import PoolCreationForm from "./PoolCreation/PoolCreationForm";
 import OptionCreationForm from "./OptionCreation/OptionCreationForm";
 import { ProgramProvider } from "./Contexts/ProgramContext";
+import PoolUpdateStatus from "./PoolUpdateStatus/PoolUpdateStatus";
 
 enum FormType {
   PoolCreation = "poolCreation",
   OptionCreation = "optionCreation",
+  PoolUpdateStatus = "poolUpdateStatus",
 }
 
 function App() {
@@ -21,6 +23,8 @@ function App() {
         return <PoolCreationForm />;
       case FormType.OptionCreation:
         return <OptionCreationForm />;
+      case FormType.PoolUpdateStatus:
+        return <PoolUpdateStatus />;
       default:
         throw new Error("Invalid form type");
     }
@@ -53,6 +57,15 @@ function App() {
                 onChange={(e) => setSelectedForm(e.target.value as FormType)}
               />
               Option Creation
+            </label>
+            <label>
+              <input
+                type="radio"
+                value={FormType.PoolUpdateStatus}
+                checked={selectedForm === FormType.PoolUpdateStatus}
+                onChange={(e) => setSelectedForm(e.target.value as FormType)}
+              />
+              Update Pool
             </label>
           </fieldset>
         </div>
