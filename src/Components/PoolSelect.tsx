@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { fetchPools } from "../api";
+import { fetchPools, Pool } from "../api";
 
 interface PoolSelectProps {
   selectedPoolAddress: string;
   onChange: (poolAddress: string) => void;
   disabled?: boolean;
+  filter?: (pool: Pool) => boolean;
 }
 
 const PoolSelect: React.FC<PoolSelectProps> = ({
   selectedPoolAddress,
   onChange,
   disabled = false,
+  filter: filterFn = () => true, // allow all pools by default
 }) => {
   const [pools, setPools] = useState<{ address: string; title: string }[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -19,8 +21,8 @@ const PoolSelect: React.FC<PoolSelectProps> = ({
     setIsLoading(true);
     try {
       const allPools = await fetchPools();
-      const activePools = allPools.filter((pool) => !pool.isPaused);
-      setPools(activePools.map(({ address, title }) => ({ address, title })));
+      const filteredPools = allPools.filter(filterFn);
+      setPools(filteredPools.map(({ address, title }) => ({ address, title })));
     } catch (error) {
       console.error("Failed to load pools:", error);
     } finally {

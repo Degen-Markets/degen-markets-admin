@@ -14,20 +14,46 @@ export const uploadImage = (uploadImagePayload: UploadImagePayload) =>
     uploadImagePayload,
   );
 
-type PoolResponse = {
+export type Pool = {
   address: string;
   title: string;
   description: string;
   image: `https://${string}`;
   isPaused: boolean;
-}[];
-export const fetchPools = async (): Promise<PoolResponse> => {
+};
+
+type PoolsResponse = Pool[];
+
+export const fetchPools = async (): Promise<PoolsResponse> => {
   try {
-    const res = await axios.get<PoolResponse>(`${baseUrl}/pools`);
+    const res = await axios.get<PoolsResponse>(`${baseUrl}/pools`);
     return res.data;
   } catch (error) {
     console.error(error);
     window.alert("Could not fetch pools");
     throw new Error("Could not fetch pools"); // stop further execution
+  }
+};
+
+type OptionsResponse = {
+  address: string;
+  pool: string;
+  title: string;
+  value: string;
+  isWinningOption: boolean;
+}[];
+
+export const fetchOptions = async (
+  poolAddress: string,
+): Promise<OptionsResponse> => {
+  try {
+    const res = await axios.get<OptionsResponse>(
+      `${baseUrl}/options?pool=${poolAddress}`,
+    );
+    return res.data;
+  } catch (error) {
+    console.error(error);
+    window.alert("Could not fetch options");
+    throw new Error("Could not fetch options");
   }
 };

@@ -4,6 +4,7 @@ import { PublicKey } from "@solana/web3.js";
 import PoolSelect from "../Components/PoolSelect";
 import { useProgram } from "../Contexts/ProgramContext";
 import { useAnchorWallet, useWallet } from "@solana/wallet-adapter-react";
+import { Pool } from "../api";
 
 const PoolUpdateStatus = () => {
   const [selectedPoolAddress, setSelectedPoolAddress] = useState("");
@@ -54,6 +55,7 @@ const PoolUpdateStatus = () => {
           selectedPoolAddress={selectedPoolAddress}
           onChange={setSelectedPoolAddress}
           disabled={isProcessing}
+          filter={filterActivePools}
         />
       </div>
       <div style={{ marginTop: "10px" }}>
@@ -72,5 +74,7 @@ const PoolUpdateStatus = () => {
     </div>
   );
 };
+
+const filterActivePools = (pool: Pool) => !pool.isPaused;
 
 export default PoolUpdateStatus;
