@@ -34,7 +34,10 @@ export const fetchPools = async (): Promise<PoolResponse> => {
 
 type OptionResponse = {
   address: string;
+  pool: string;
   title: string;
+  value: string;
+  isWinningOption: boolean;
 }[];
 
 export const fetchOptions = async (
