@@ -31,3 +31,23 @@ export const fetchPools = async (): Promise<PoolResponse> => {
     throw new Error("Could not fetch pools"); // stop further execution
   }
 };
+
+type OptionResponse = {
+  address: string;
+  title: string;
+}[];
+
+export const fetchOptions = async (
+  poolAddress: string,
+): Promise<OptionResponse> => {
+  try {
+    const res = await axios.get<OptionResponse>(
+      `${baseUrl}/options?pool=${poolAddress}`,
+    );
+    return res.data;
+  } catch (error) {
+    console.error(error);
+    window.alert("Could not fetch options");
+    throw new Error("Could not fetch options");
+  }
+};

@@ -3,6 +3,7 @@ import WalletContextProvider from "./Contexts/WalletProvider";
 import SolanaConnectButton from "./SolanaConnectButton";
 import PoolCreationForm from "./PoolCreation/PoolCreationForm";
 import OptionCreationForm from "./OptionCreation/OptionCreationForm";
+import SetWinningOptionForm from "./SetWinningOption/SetWinningOptionForm";
 import { ProgramProvider } from "./Contexts/ProgramContext";
 import PoolUpdateStatus from "./PoolUpdateStatus/PoolUpdateStatus";
 
@@ -10,6 +11,7 @@ enum FormType {
   PoolCreation = "poolCreation",
   OptionCreation = "optionCreation",
   PoolUpdateStatus = "poolUpdateStatus",
+  SetWinningOption = "setWinningOption",
 }
 
 function App() {
@@ -25,6 +27,8 @@ function App() {
         return <OptionCreationForm />;
       case FormType.PoolUpdateStatus:
         return <PoolUpdateStatus />;
+      case FormType.SetWinningOption:
+        return <SetWinningOptionForm />;
       default:
         throw new Error("Invalid form type");
     }
@@ -66,6 +70,15 @@ function App() {
                 onChange={(e) => setSelectedForm(e.target.value as FormType)}
               />
               Update Pool
+            </label>
+            <label>
+              <input
+                type="radio"
+                value={FormType.SetWinningOption}
+                checked={selectedForm === FormType.SetWinningOption}
+                onChange={(e) => setSelectedForm(e.target.value as FormType)}
+              />
+              Set Winning Option
             </label>
           </fieldset>
         </div>

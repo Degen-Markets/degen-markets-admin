@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useProgram } from "../Contexts/ProgramContext";
 import { useAnchorWallet, useWallet } from "@solana/wallet-adapter-react";
 import * as anchor from "@coral-xyz/anchor";
 import { deriveOptionAccountKey, getOptionHash } from "../utils/options";
 import { getBytesFromHex } from "../utils/cryptography";
-import { fetchPools } from "../api";
 import PoolSelect from "../Components/PoolSelect";
 
 const OptionCreationForm = () => {
