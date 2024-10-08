@@ -61,7 +61,6 @@ export type DegenPools = {
           name: "admin";
           writable: true;
           signer: true;
-          address: "rv9MdKVp2r13ZrFAwaES1WAQELtsSG4KEMdxur8ghXd";
         },
         {
           name: "systemProgram";
@@ -101,7 +100,6 @@ export type DegenPools = {
           name: "admin";
           writable: true;
           signer: true;
-          address: "rv9MdKVp2r13ZrFAwaES1WAQELtsSG4KEMdxur8ghXd";
         },
         {
           name: "systemProgram";
@@ -186,6 +184,7 @@ export type DegenPools = {
           name: "admin";
           writable: true;
           signer: true;
+          address: "rv9MdKVp2r13ZrFAwaES1WAQELtsSG4KEMdxur8ghXd";
         },
       ];
       args: [
@@ -207,6 +206,7 @@ export type DegenPools = {
           name: "admin";
           writable: true;
           signer: true;
+          address: "rv9MdKVp2r13ZrFAwaES1WAQELtsSG4KEMdxur8ghXd";
         },
       ];
       args: [
@@ -244,6 +244,14 @@ export type DegenPools = {
       name: "poolEntered";
       discriminator: [224, 196, 156, 64, 200, 219, 71, 199];
     },
+    {
+      name: "poolStatusUpdated";
+      discriminator: [54, 220, 85, 46, 3, 37, 43, 233];
+    },
+    {
+      name: "winnerSet";
+      discriminator: [126, 40, 173, 69, 22, 114, 226, 237];
+    },
   ];
   errors: [
     {
@@ -279,7 +287,7 @@ export type DegenPools = {
     {
       code: 6006;
       name: "imageUrlTooLong";
-      msg: "The image URL is too long. Maximum length is 100 characters.";
+      msg: "The image URL is too long. Maximum length is 200 characters.";
     },
     {
       code: 6007;
@@ -412,6 +420,38 @@ export type DegenPools = {
           {
             name: "value";
             type: "u64";
+          },
+        ];
+      };
+    },
+    {
+      name: "poolStatusUpdated";
+      type: {
+        kind: "struct";
+        fields: [
+          {
+            name: "isPaused";
+            type: "bool";
+          },
+          {
+            name: "pool";
+            type: "pubkey";
+          },
+        ];
+      };
+    },
+    {
+      name: "winnerSet";
+      type: {
+        kind: "struct";
+        fields: [
+          {
+            name: "pool";
+            type: "pubkey";
+          },
+          {
+            name: "option";
+            type: "pubkey";
           },
         ];
       };
