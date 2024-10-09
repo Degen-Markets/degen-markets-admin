@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { fetchPools, Pool } from "../api";
 
 interface PoolSelectProps {
@@ -17,7 +17,7 @@ const PoolSelect: React.FC<PoolSelectProps> = ({
   const [pools, setPools] = useState<{ address: string; title: string }[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  const loadPools = async () => {
+  const loadPools = useCallback(async () => {
     setIsLoading(true);
     try {
       const allPools = await fetchPools();
@@ -28,11 +28,11 @@ const PoolSelect: React.FC<PoolSelectProps> = ({
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [filterFn]);
 
   useEffect(() => {
     loadPools();
-  }, []);
+  }, [loadPools]);
 
   return (
     <select
