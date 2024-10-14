@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const baseUrl = "https://api.degenmarkets.com/";
+const dgmApi = axios.create({ baseURL: "https://api.degenmarkets.com" });
 
 type UploadImagePayload = {
   image: string;
@@ -9,10 +9,7 @@ type UploadImagePayload = {
 };
 
 export const uploadImage = (uploadImagePayload: UploadImagePayload) =>
-  axios.post<{ imageUrl: string }>(
-    `${baseUrl}/admin/upload-image`,
-    uploadImagePayload,
-  );
+  dgmApi.post<{ imageUrl: string }>(`/admin/upload-image`, uploadImagePayload);
 
 export type Pool = {
   address: string;
@@ -26,7 +23,7 @@ type PoolsResponse = Pool[];
 
 export const fetchPools = async (): Promise<PoolsResponse> => {
   try {
-    const res = await axios.get<PoolsResponse>(`${baseUrl}/pools`);
+    const res = await dgmApi.get<PoolsResponse>(`/pools`);
     return res.data;
   } catch (error) {
     console.error(error);
@@ -47,13 +44,28 @@ export const fetchOptions = async (
   poolAddress: string,
 ): Promise<OptionsResponse> => {
   try {
-    const res = await axios.get<OptionsResponse>(
-      `${baseUrl}/options?pool=${poolAddress}`,
+    const res = await dgmApi.get<OptionsResponse>(
+      `/options?pool=${poolAddress}`,
     );
     return res.data;
   } catch (error) {
     console.error(error);
     window.alert("Could not fetch options");
     throw new Error("Could not fetch options");
+  }
+};
+
+export const deletePool = async ({
+  poolAddress,
+  signature,
+}: {
+  poolAddress: string;
+  signature: string;
+}): Promise<void> => {
+  try {
+    await dgmApi.post(`/admin/delete-pool`, { poolAddress, signature });
+  } catch (error) {
+    console.error("Failed to delete pool:", error);
+    throw new Error("Could not delete pool");
   }
 };

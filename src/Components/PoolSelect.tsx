@@ -8,11 +8,13 @@ interface PoolSelectProps {
   filter?: (pool: Pool) => boolean;
 }
 
+const defaultFilterFn = () => true; // needs to be outside the component to avoid re-renders
+
 const PoolSelect: React.FC<PoolSelectProps> = ({
   selectedPoolAddress,
   onChange,
   disabled = false,
-  filter: filterFn = () => true, // allow all pools by default
+  filter: filterFn = defaultFilterFn, // allow all pools by default
 }) => {
   const [pools, setPools] = useState<{ address: string; title: string }[]>([]);
   const [isLoading, setIsLoading] = useState(true);
