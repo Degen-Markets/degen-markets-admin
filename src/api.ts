@@ -10,7 +10,7 @@ type UploadImagePayload = {
 
 export const uploadImage = (uploadImagePayload: UploadImagePayload) =>
   axios.post<{ imageUrl: string }>(
-    `${baseUrl}/upload-image`,
+    `${baseUrl}/admin/upload-image`,
     uploadImagePayload,
   );
 
