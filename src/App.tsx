@@ -6,12 +6,14 @@ import OptionCreationForm from "./OptionCreation/OptionCreationForm";
 import SetWinningOptionForm from "./SetWinningOption/SetWinningOptionForm";
 import { ProgramProvider } from "./Contexts/ProgramContext";
 import PoolUpdateStatus from "./PoolUpdateStatus/PoolUpdateStatus";
+import DeletePoolForm from "./DeletePool/DeletePoolForm";
 
 enum FormType {
   PoolCreation = "poolCreation",
   OptionCreation = "optionCreation",
   PoolUpdateStatus = "poolUpdateStatus",
   SetWinningOption = "setWinningOption",
+  DeletePool = "deletePool",
 }
 
 function App() {
@@ -29,6 +31,8 @@ function App() {
         return <PoolUpdateStatus />;
       case FormType.SetWinningOption:
         return <SetWinningOptionForm />;
+      case FormType.DeletePool:
+        return <DeletePoolForm />;
       default:
         throw new Error("Invalid form type");
     }
@@ -79,6 +83,15 @@ function App() {
                 onChange={(e) => setSelectedForm(e.target.value as FormType)}
               />
               Set Winning Option
+            </label>
+            <label>
+              <input
+                type="radio"
+                value={FormType.DeletePool}
+                checked={selectedForm === FormType.DeletePool}
+                onChange={(e) => setSelectedForm(e.target.value as FormType)}
+              />
+              Delete Pool
             </label>
           </fieldset>
         </div>

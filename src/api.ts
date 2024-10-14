@@ -54,3 +54,18 @@ export const fetchOptions = async (
     throw new Error("Could not fetch options");
   }
 };
+
+export const deletePool = async ({
+  poolAddress,
+  signature,
+}: {
+  poolAddress: string;
+  signature: string;
+}): Promise<void> => {
+  try {
+    await dgmApi.post(`/admin/delete-pool`, { poolAddress, signature });
+  } catch (error) {
+    console.error("Failed to delete pool:", error);
+    throw new Error("Could not delete pool");
+  }
+};
