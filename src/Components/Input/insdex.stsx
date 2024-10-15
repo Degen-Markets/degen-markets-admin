@@ -1,0 +1,50 @@
+// import { ChangeEvent, FC } from "react";
+
+// interface SingleInputProps
+//   extends React.InputHTMLAttributes<HTMLInputElement>,
+//     React.TextareaHTMLAttributes<HTMLTextAreaElement> {
+//   label: string;
+//   type?: "text" | "textarea";
+// }
+
+// const SingleInput: FC<SingleInputProps> = ({
+//   label,
+//   type = "text",
+//   onChange,
+//   value,
+//   ...props
+// }) => {
+//   const handleInput = (
+//     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+//   ) => {
+//     if (onChange) {
+//       onChange(e); // Let the parent handle the change event.
+//     }
+//   };
+
+//   return (
+//     <div>
+//       <label>
+//         {label}:&nbsp;&nbsp;
+//         {type === "textarea" ? (
+//           <textarea
+//             value={value}
+//             onChange={handleInput}
+//             className="border rounded p-2"
+//             {...props} // Pass down all other props
+//           />
+//         ) : (
+//           <input
+//             type={type}
+//             value={value}
+//             onChange={handleInput}
+//             className="border rounded p-2"
+//             {...props} // Pass down all other props
+//           />
+//         )}
+//       </label>
+//     </div>
+//   );
+// };
+
+// export default SingleInput;
