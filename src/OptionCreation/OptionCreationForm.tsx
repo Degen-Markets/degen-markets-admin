@@ -104,7 +104,7 @@ const OptionCreationForm = () => {
             className="block w-full p-2 bg-white border border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-purple-500 focus:border-purple-500 disabled:bg-gray-200 disabled:text-gray-500"
           />
         </div>
-        <Button intent="primary" type="submit">
+        <Button type="submit">
           {isSubmitting ? "Creating Option..." : "Create Option"}
         </Button>
       </fieldset>

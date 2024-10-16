@@ -81,7 +81,7 @@ const SetWinningOptionForm = () => {
             disabled={isSubmitting}
           />
         </div>
-        <Button intent="primary" type="submit">
+        <Button type="submit">
           {isSubmitting ? "Setting Winning Option..." : "Set Winning Option"}
         </Button>
       </fieldset>

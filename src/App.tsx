@@ -11,7 +11,7 @@ import DeletePoolForm from "./DeletePool/DeletePoolForm";
 enum FormType {
   PoolCreation = "poolCreation",
   OptionCreation = "optionCreation",
-  PoolUpdateStatus = "poolUpdateStatus",
+  PausePoolForm = "pausePool",
   SetWinningOption = "setWinningOption",
   DeletePool = "deletePool",
 }
@@ -19,7 +19,7 @@ enum FormType {
 const formOptions = [
   { label: "Pool Creation", value: FormType.PoolCreation },
   { label: "Option Creation", value: FormType.OptionCreation },
-  { label: "Update Pool", value: FormType.PoolUpdateStatus },
+  { label: "Pause Pool", value: FormType.PausePoolForm },
   { label: "Set Winning Option", value: FormType.SetWinningOption },
   { label: "Delete Pool", value: FormType.DeletePool },
 ];
@@ -35,7 +35,7 @@ function App() {
         return <PoolCreationForm />;
       case FormType.OptionCreation:
         return <OptionCreationForm />;
-      case FormType.PoolUpdateStatus:
+      case FormType.PausePoolForm:
         return <PoolUpdateStatus />;
       case FormType.SetWinningOption:
         return <SetWinningOptionForm />;

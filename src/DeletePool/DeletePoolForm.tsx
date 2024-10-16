@@ -65,7 +65,7 @@ const DeletePoolForm: React.FC = () => {
             disabled={isSubmitting}
           />
         </div>
-        <Button intent="primary" type="submit" disabled={!selectedPoolAddress}>
+        <Button type="submit" disabled={!selectedPoolAddress}>
           {isSubmitting ? "Deleting Pool..." : "Delete Pool"}
         </Button>
       </fieldset>

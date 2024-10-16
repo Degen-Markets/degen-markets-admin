@@ -93,12 +93,7 @@ const CreatePoolButton = () => {
 
   return (
     <div className="flex justify-end">
-      <Button
-        intent="primary"
-        type="submit"
-        onClick={createPool}
-        disabled={isSubmitting}
-      >
+      <Button type="submit" onClick={createPool} disabled={isSubmitting}>
         {isSubmitting ? "Creating Pool..." : "Create Pool"}
       </Button>
     </div>

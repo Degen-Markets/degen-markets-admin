@@ -7,7 +7,7 @@ import { useAnchorWallet, useWallet } from "@solana/wallet-adapter-react";
 import { Pool } from "../api";
 import { Button } from "../Components/Button";
 
-const PoolUpdateStatus = () => {
+const PausePoolForm = () => {
   const [selectedPoolAddress, setSelectedPoolAddress] = useState("");
   const [isProcessing, setIsProcessing] = useState(false);
   const { program } = useProgram();
@@ -49,7 +49,6 @@ const PoolUpdateStatus = () => {
 
   return (
     <div>
-      {/* <h2 className="text-2xl mb-2 text-white font-bold">Pause a Pool</h2> */}
       <div>
         <label
           htmlFor="poolTitle"
@@ -66,7 +65,6 @@ const PoolUpdateStatus = () => {
       </div>
       <div style={{ marginTop: "10px" }}>
         <Button
-          intent="primary"
           onClick={() => pausePool(true)}
           disabled={!selectedPoolAddress || isProcessing}
           style={{ marginRight: "10px" }}
@@ -84,4 +82,4 @@ const PoolUpdateStatus = () => {
 
 const filterActivePools = (pool: Pool) => !pool.isPaused;
 
-export default PoolUpdateStatus;
+export default PausePoolForm;
