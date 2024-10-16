@@ -5,8 +5,8 @@ import PoolCreationForm from "./PoolCreation/PoolCreationForm";
 import OptionCreationForm from "./OptionCreation/OptionCreationForm";
 import SetWinningOptionForm from "./SetWinningOption/SetWinningOptionForm";
 import { ProgramProvider } from "./Contexts/ProgramContext";
-import PoolUpdateStatus from "./PoolUpdateStatus/PoolUpdateStatus";
 import DeletePoolForm from "./DeletePool/DeletePoolForm";
+import PausePoolForm from "./PausePool /PausePoolForm";
 
 enum FormType {
   PoolCreation = "poolCreation",
@@ -36,7 +36,7 @@ function App() {
       case FormType.OptionCreation:
         return <OptionCreationForm />;
       case FormType.PausePoolForm:
-        return <PoolUpdateStatus />;
+        return <PausePoolForm />;
       case FormType.SetWinningOption:
         return <SetWinningOptionForm />;
       case FormType.DeletePool:
