@@ -4,6 +4,7 @@ import PoolSelect from "../Components/PoolSelect";
 import { deletePool } from "../api";
 import { signMessage } from "../utils/cryptography";
 import { bs58 } from "@coral-xyz/anchor/dist/cjs/utils/bytes";
+import { Button } from "../Components/Button";
 
 const DeletePoolForm: React.FC = () => {
   const [selectedPoolAddress, setSelectedPoolAddress] = useState("");
@@ -51,17 +52,22 @@ const DeletePoolForm: React.FC = () => {
         disabled={isSubmitting}
         style={{ border: "none", padding: 0, margin: 0 }}
       >
-        <div>
-          <label htmlFor="poolSelect">Select Pool to Delete:</label>
+        <div className="mb-2">
+          <label
+            htmlFor="poolSelect"
+            className="font-bold text-lg uppercase text-white"
+          >
+            Select Pool to Delete
+          </label>
           <PoolSelect
             selectedPoolAddress={selectedPoolAddress}
             onChange={setSelectedPoolAddress}
             disabled={isSubmitting}
           />
         </div>
-        <button type="submit" disabled={!selectedPoolAddress}>
+        <Button type="submit" disabled={!selectedPoolAddress}>
           {isSubmitting ? "Deleting Pool..." : "Delete Pool"}
-        </button>
+        </Button>
       </fieldset>
     </form>
   );

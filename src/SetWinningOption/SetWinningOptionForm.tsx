@@ -5,6 +5,7 @@ import * as anchor from "@coral-xyz/anchor";
 import PoolSelect from "../Components/PoolSelect";
 import OptionSelect from "../Components/OptionSelect";
 import { Pool } from "../api";
+import { Button } from "../Components/Button";
 
 const SetWinningOptionForm = () => {
   const { program } = useProgram();
@@ -52,8 +53,13 @@ const SetWinningOptionForm = () => {
         disabled={isSubmitting}
         style={{ border: "none", padding: 0, margin: 0 }}
       >
-        <div>
-          <label htmlFor="poolSelect">Select Pool:</label>
+        <div className="space-y-1 mb-2">
+          <label
+            htmlFor="poolSelect"
+            className="font-bold text-lg uppercase  text-white"
+          >
+            Select Pool
+          </label>
           <PoolSelect
             selectedPoolAddress={selectedPoolAddress}
             onChange={setSelectedPoolAddress}
@@ -61,8 +67,13 @@ const SetWinningOptionForm = () => {
             filter={filterPausedPools}
           />
         </div>
-        <div>
-          <label htmlFor="optionSelect">Select Option:</label>
+        <div className="space-y-1 mb-2">
+          <label
+            htmlFor="optionSelect"
+            className="font-bold text-lg uppercase  text-white"
+          >
+            Select Option
+          </label>
           <OptionSelect
             poolAddress={selectedPoolAddress}
             selectedOptionAddress={selectedOptionAddress}
@@ -70,9 +81,9 @@ const SetWinningOptionForm = () => {
             disabled={isSubmitting}
           />
         </div>
-        <button type="submit">
+        <Button type="submit">
           {isSubmitting ? "Setting Winning Option..." : "Set Winning Option"}
-        </button>
+        </Button>
       </fieldset>
     </form>
   );

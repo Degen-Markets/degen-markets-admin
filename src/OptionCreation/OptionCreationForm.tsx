@@ -6,6 +6,7 @@ import { deriveOptionAccountKey, getOptionHash } from "../utils/options";
 import { getBytesFromHex } from "../utils/cryptography";
 import PoolSelect from "../Components/PoolSelect";
 import { Pool } from "../api";
+import { Button } from "../Components/Button";
 
 const OptionCreationForm = () => {
   const { program } = useProgram();
@@ -70,12 +71,14 @@ const OptionCreationForm = () => {
 
   return (
     <form onSubmit={tryHandleSubmit}>
-      <fieldset
-        disabled={isSubmitting}
-        style={{ border: "none", padding: 0, margin: 0 }}
-      >
-        <div>
-          <label htmlFor="poolTitle">Select Pool:</label>
+      <fieldset disabled={isSubmitting} className="border-none m-0 p-0">
+        <div className="space-y-1 mb-2">
+          <label
+            htmlFor="poolTitle"
+            className="font-bold text-lg uppercase  text-white"
+          >
+            Select Pool
+          </label>
           <PoolSelect
             selectedPoolAddress={selectedPoolAddress}
             onChange={setSelectedPoolAddress}
@@ -83,20 +86,27 @@ const OptionCreationForm = () => {
             filter={filterActivePools}
           />
         </div>
-        <div>
-          <label htmlFor={formFields.optionTitle}>Option Title:</label>
+        <div className="space-y-1 mb-2">
+          <label
+            htmlFor={formFields.optionTitle}
+            className="font-bold text-lg uppercase  text-white"
+          >
+            Option Title:
+          </label>
           <input
             type="text"
             id={formFields.optionTitle}
             name={formFields.optionTitle}
+            placeholder="Enter option title"
             required
             minLength={1}
             maxLength={30}
+            className="block w-full p-2 bg-white border border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-purple-500 focus:border-purple-500 disabled:bg-gray-200 disabled:text-gray-500"
           />
         </div>
-        <button type="submit">
+        <Button type="submit">
           {isSubmitting ? "Creating Option..." : "Create Option"}
-        </button>
+        </Button>
       </fieldset>
     </form>
   );

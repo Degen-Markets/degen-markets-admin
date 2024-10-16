@@ -20,6 +20,7 @@ const OptionSelect: React.FC<OptionSelectProps> = ({
       value={selectedOptionAddress}
       onChange={(e) => onChange(e.target.value)}
       disabled={disabled || isLoading || options.length === 0}
+      className="block w-full p-2 bg-white border border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-purple-500 focus:border-purple-500 disabled:bg-gray-200 disabled:text-gray-500 cursor-pointer"
     >
       {isLoading ? (
         <option value="">Fetching Options...</option>

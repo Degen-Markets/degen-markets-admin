@@ -8,6 +8,7 @@ import * as anchor from "@coral-xyz/anchor";
 import { AxiosError } from "axios";
 import bs58 from "bs58";
 import { useProgram } from "../Contexts/ProgramContext";
+import { Button } from "../Components/Button";
 
 const CreatePoolButton = () => {
   const {
@@ -91,9 +92,11 @@ const CreatePoolButton = () => {
   };
 
   return (
-    <button type="submit" onClick={createPool} disabled={isSubmitting}>
-      {isSubmitting ? "Creating Pool..." : "Create Pool"}
-    </button>
+    <div className="flex justify-end">
+      <Button type="submit" onClick={createPool} disabled={isSubmitting}>
+        {isSubmitting ? "Creating Pool..." : "Create Pool"}
+      </Button>
+    </div>
   );
 };
 
