@@ -1,10 +1,7 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import ImageUpload from "./ImageUpload";
 import CreatePoolButton from "./CreatePoolButton";
-import {
-  PoolCreationContext,
-  PoolCreationContextProvider,
-} from "./PoolCreationContext";
+import { PoolCreationContext } from "./PoolCreationContext";
 import TitleInput from "./TitleInput";
 import DescriptionTextarea from "./DescriptionTextarea";
 
@@ -29,10 +26,4 @@ const PoolCreationForm = () => {
   );
 };
 
-const WrappedPoolCreationForm = () => (
-  <PoolCreationContextProvider>
-    <PoolCreationForm />
-  </PoolCreationContextProvider>
-);
-
-export default WrappedPoolCreationForm;
+export default PoolCreationForm;
