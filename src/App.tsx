@@ -1,7 +1,7 @@
 import WalletContextProvider from "./Contexts/WalletProvider";
 import { ProgramProvider } from "./Contexts/ProgramContext";
 import { PoolCreationContextProvider } from "./PoolCreation/PoolCreationContext";
-import Layout from "./MainApp";
+import Layout from "./Layout";
 
 function App() {
   return (
