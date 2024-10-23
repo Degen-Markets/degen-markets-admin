@@ -24,7 +24,7 @@ const formOptions = [
   { label: "Delete Pool", value: FormType.DeletePool },
 ];
 
-const MainApp = () => {
+const Layout = () => {
   const [selectedForm, setSelectedForm] = useState<FormType>(
     FormType.PoolCreation,
   );
@@ -104,4 +104,4 @@ const MainApp = () => {
   );
 };
 
-export default MainApp;
+export default Layout;
