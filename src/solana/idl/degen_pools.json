@@ -1,5 +1,5 @@
 {
-  "address": "2JWqYTXG5yHSU78hjKb39YFx82whbK74v6sMqMG3TVBQ",
+  "address": "5MnKYzSNUZgxjBNMz4QQczAeZyrEGJsuneV31p3tCEM3",
   "metadata": {
     "name": "degen_pools",
     "version": "0.1.0",
@@ -86,6 +86,10 @@
               {
                 "kind": "arg",
                 "path": "title_hash"
+              },
+              {
+                "kind": "account",
+                "path": "admin"
               }
             ]
           }
@@ -243,6 +247,10 @@
       "discriminator": [54, 220, 85, 46, 3, 37, 43, 233]
     },
     {
+      "name": "WinClaimed",
+      "discriminator": [222, 254, 147, 204, 233, 195, 37, 131]
+    },
+    {
       "name": "WinnerSet",
       "discriminator": [126, 40, 173, 69, 22, 114, 226, 237]
     }
@@ -287,6 +295,11 @@
       "code": 6007,
       "name": "DescriptionTooLong",
       "msg": "The description is too long. Maximum length is 200 characters."
+    },
+    {
+      "code": 6008,
+      "name": "PoolAccountDoesNotMatch",
+      "msg": "Pool account does not match derived key"
     }
   ],
   "types": [
@@ -426,6 +439,26 @@
           {
             "name": "is_paused",
             "type": "bool"
+          },
+          {
+            "name": "pool",
+            "type": "pubkey"
+          }
+        ]
+      }
+    },
+    {
+      "name": "WinClaimed",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "entry",
+            "type": "pubkey"
+          },
+          {
+            "name": "winner",
+            "type": "pubkey"
           },
           {
             "name": "pool",

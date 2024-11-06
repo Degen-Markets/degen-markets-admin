@@ -2,10 +2,10 @@
  * Program IDL in camelCase format in order to be used in JS/TS.
  *
  * Note that this is only a type helper and is not the actual IDL. The original
- * IDL can be found at `solana/idl/degen_pools.json`.
+ * IDL can be found at `target/idl/degen_pools.json`.
  */
 export type DegenPools = {
-  address: "2JWqYTXG5yHSU78hjKb39YFx82whbK74v6sMqMG3TVBQ";
+  address: "5MnKYzSNUZgxjBNMz4QQczAeZyrEGJsuneV31p3tCEM3";
   metadata: {
     name: "degenPools";
     version: "0.1.0";
@@ -92,6 +92,10 @@ export type DegenPools = {
               {
                 kind: "arg";
                 path: "titleHash";
+              },
+              {
+                kind: "account";
+                path: "admin";
               },
             ];
           };
@@ -249,6 +253,10 @@ export type DegenPools = {
       discriminator: [54, 220, 85, 46, 3, 37, 43, 233];
     },
     {
+      name: "winClaimed";
+      discriminator: [222, 254, 147, 204, 233, 195, 37, 131];
+    },
+    {
       name: "winnerSet";
       discriminator: [126, 40, 173, 69, 22, 114, 226, 237];
     },
@@ -293,6 +301,11 @@ export type DegenPools = {
       code: 6007;
       name: "descriptionTooLong";
       msg: "The description is too long. Maximum length is 200 characters.";
+    },
+    {
+      code: 6008;
+      name: "poolAccountDoesNotMatch";
+      msg: "Pool account does not match derived key";
     },
   ];
   types: [
@@ -432,6 +445,26 @@ export type DegenPools = {
           {
             name: "isPaused";
             type: "bool";
+          },
+          {
+            name: "pool";
+            type: "pubkey";
+          },
+        ];
+      };
+    },
+    {
+      name: "winClaimed";
+      type: {
+        kind: "struct";
+        fields: [
+          {
+            name: "entry";
+            type: "pubkey";
+          },
+          {
+            name: "winner";
+            type: "pubkey";
           },
           {
             name: "pool";
