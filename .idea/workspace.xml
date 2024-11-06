@@ -5,8 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2bcf7e30-540d-4300-8d4d-61b8189dace5" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.github/workflows/deploy-dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/deploy-dev.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.github/workflows/deploy.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/deploy.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Contexts/WalletProvider.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Contexts/WalletProvider.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,7 +83,7 @@
       <workItem from="1730217630250" duration="852000" />
       <workItem from="1730282165602" duration="599000" />
       <workItem from="1730363412776" duration="1036000" />
-      <workItem from="1730913718033" duration="116000" />
+      <workItem from="1730913718033" duration="341000" />
     </task>
     <servers />
   </component>
