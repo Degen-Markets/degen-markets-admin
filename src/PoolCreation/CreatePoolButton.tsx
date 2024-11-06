@@ -61,7 +61,11 @@ const CreatePoolButton = () => {
               (e as Error).message,
           );
         }
-        const poolAccountKey = await derivePoolAccountKey(program, title);
+        const poolAccountKey = await derivePoolAccountKey(
+          program,
+          title,
+          wallet.publicKey,
+        );
         setPoolAccountKey(poolAccountKey);
         const titleHash = getPoolTitleHash(title);
         const transaction = await program.methods

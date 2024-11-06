@@ -5,13 +5,16 @@ import { Program, web3 } from "@coral-xyz/anchor";
 export const derivePoolAccountKey = async (
   program: Program<DegenPools>,
   poolTitle: string,
+  creator: web3.PublicKey,
 ) => {
-  const poolTitleHash = getHashStr(poolTitle);
+  console.log(
+    `Deriving pool account from ${poolTitle} & ${creator.toString()}`,
+  );
   const [pda] = web3.PublicKey.findProgramAddressSync(
-    [getBytesFromHex(poolTitleHash)],
+    [getBytesFromHex(poolTitle), creator.toBytes()],
     program.programId,
   );
-  console.log(`Derived pool account is ${pda}`);
+  console.log(`Derived pool account key: ${pda.toString()}`);
   return pda;
 };
 
