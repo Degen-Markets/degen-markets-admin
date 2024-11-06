@@ -1,6 +1,8 @@
 import axios from "axios";
 
-const dgmApi = axios.create({ baseURL: "https://api.degenmarkets.com" });
+const dgmApi = axios.create({
+  baseURL: `https://${window.location.host === "degenmarkets.com" ? "api" : "dev-api"}.degenmarkets.com`,
+});
 
 type UploadImagePayload = {
   image: string;
