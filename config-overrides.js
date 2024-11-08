@@ -1,4 +1,4 @@
-const { ProvidePlugin } = require("webpack");
+const { ProvidePlugin, DefinePlugin } = require("webpack");
 
 module.exports = function (config, env) {
   return {
@@ -24,6 +24,9 @@ module.exports = function (config, env) {
       ...config.plugins,
       new ProvidePlugin({
         process: "process/browser",
+      }),
+      new DefinePlugin({
+        __DEPLOYMENT_ENV__: JSON.stringify(process.env.DEPLOYMENT_ENV),
       }),
     ],
     resolve: {

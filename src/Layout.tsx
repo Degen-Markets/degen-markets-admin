@@ -7,6 +7,7 @@ import DeletePoolForm from "./DeletePool/DeletePoolForm";
 import PreviewPool from "./Components/PreviewPool";
 import SolanaConnectButton from "./SolanaConnectButton";
 import { PoolCreationContext } from "./PoolCreation/PoolCreationContext";
+import { DEPLOYMENT_ENV } from "./constants";
 
 enum FormType {
   PoolCreation = "poolCreation",
@@ -51,7 +52,9 @@ const Layout = () => {
   return (
     <div className="flex flex-col items-center min-h-screen bg-black-main py-10 md:py-0">
       <header className="flex justify-between w-full p-4">
-        <div className="text-2xl font-bold text-white">DEGENS ADMIN</div>
+        <div className="text-2xl font-bold text-white">
+          DEGENS ADMIN - {DEPLOYMENT_ENV}
+        </div>
         <SolanaConnectButton />
       </header>
 
