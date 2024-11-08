@@ -35,7 +35,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-app-rewired start",
+    "start": "DEPLOYMENT_ENV=devnet react-app-rewired start",
+    "start:prod": "DEPLOYMENT_ENV=mainnet react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
