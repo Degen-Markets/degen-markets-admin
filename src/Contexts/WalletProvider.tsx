@@ -5,12 +5,13 @@ import {
 } from "@solana/wallet-adapter-react";
 import { PhantomWalletAdapter } from "@solana/wallet-adapter-wallets";
 import { WalletModalProvider } from "@solana/wallet-adapter-react-ui";
+import { DEPLOYMENT_ENV } from "../constants";
 
 // Default styles that can be overridden by your app
 require("@solana/wallet-adapter-react-ui/styles.css");
 
 const endpoint =
-  window.location.host === "admin.degenmarkets.com"
+  DEPLOYMENT_ENV === "mainnet"
     ? "https://mainnet.helius-rpc.com/?api-key=e1a64489-5669-4f4a-ad45-420c51b1a411"
     : "https://devnet.helius-rpc.com/?api-key=d89de0bd-ea34-4f41-9f17-5e0715a54d78";
 
