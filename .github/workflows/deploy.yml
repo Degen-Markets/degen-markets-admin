@@ -24,7 +24,7 @@ jobs:
         run: npm ci
 
       - name: Build
-        run: npm run build
+        run: DEPLOYMENT_ENV=mainnet npm run build
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
