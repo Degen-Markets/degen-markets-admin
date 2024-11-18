@@ -1,4 +1,8 @@
-import { getHashStr, getBytesFromHex } from "./cryptography";
+import {
+  getHashStr,
+  getBytesFromHex,
+  getBytesFromHashedStr,
+} from "./cryptography";
 import { DegenPools } from "../solana/types/degen_pools";
 import { Program, web3 } from "@coral-xyz/anchor";
 
@@ -11,7 +15,7 @@ export const derivePoolAccountKey = async (
     `Deriving pool account from ${poolTitle} & ${creator.toString()}`,
   );
   const [pda] = web3.PublicKey.findProgramAddressSync(
-    [getBytesFromHex(poolTitle), creator.toBytes()],
+    [getBytesFromHashedStr(poolTitle), creator.toBytes()],
     program.programId,
   );
   console.log(`Derived pool account key: ${pda.toString()}`);

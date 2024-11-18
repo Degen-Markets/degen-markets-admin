@@ -11,6 +11,12 @@ export const getBytesFromHex = (hexStr: string): Uint8Array => {
   return Uint8Array.from(Buffer.from(hexStr, "hex"));
 };
 
+export const getBytesFromHashedStr = (str: string) => {
+  const hashedStr = createHash("sha256").update(str, "utf-8");
+  const buffer = hashedStr.digest();
+  return Uint8Array.from(buffer);
+};
+
 export async function signMessage(
   wallet: WalletContextState,
 ): Promise<{ message: string; signature: Uint8Array } | null> {
