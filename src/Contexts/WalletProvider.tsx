@@ -12,7 +12,7 @@ require("@solana/wallet-adapter-react-ui/styles.css");
 
 const endpoint =
   DEPLOYMENT_ENV === "mainnet"
-    ? "https://mainnet.helius-rpc.com/?api-key=e1a64489-5669-4f4a-ad45-420c51b1a411"
+    ? "https://mainnet.helius-rpc.com/?api-key=d89de0bd-ea34-4f41-9f17-5e0715a54d78"
     : "https://devnet.helius-rpc.com/?api-key=d89de0bd-ea34-4f41-9f17-5e0715a54d78";
 
 const wallets = [new PhantomWalletAdapter()];
