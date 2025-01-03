@@ -6,8 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="2bcf7e30-540d-4300-8d4d-61b8189dace5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Contexts/WalletProvider.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Contexts/WalletProvider.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PoolCreation/CreatePoolButton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/PoolCreation/CreatePoolButton.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -114,7 +113,7 @@
       <workItem from="1733054486809" duration="603000" />
       <workItem from="1735905697030" duration="103000" />
       <workItem from="1735905811479" duration="48000" />
-      <workItem from="1735907315926" duration="268000" />
+      <workItem from="1735907315926" duration="1818000" />
     </task>
     <servers />
   </component>

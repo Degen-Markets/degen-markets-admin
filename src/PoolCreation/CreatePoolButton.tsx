@@ -54,7 +54,7 @@ const CreatePoolButton = () => {
         };
         let imageUrl = "";
         try {
-          imageUrl = (await uploadImage(payload)).data.imageUrl;
+          imageUrl = encodeURI((await uploadImage(payload)).data.imageUrl);
         } catch (e) {
           throw new Error(
             ((e as AxiosError).response?.data as { message: string }).message ||
